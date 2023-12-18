@@ -6,35 +6,48 @@ const fruits = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Black
 inputEl.addEventListener("input", search)
 
 function search() {
+	removeAutoCompeleteList()
 	const value = inputEl.value.toLowerCase()
 
-	let finalResult = []
-	
-	let results = fruits.filter((el) => el.toLowerCase().includes(value))
-	
-	finalResult.push(results)
-  
-	
+	if (value.length === 0) return
 
-	
-	createList(finalResult)
+	let results = fruits.filter((el) => el.toLowerCase().includes(value))
+
+	createList(results)
 }
 
 
 function createList(list) {
 	const suggestedList = document.createElement("ul")
-	suggestedList.className = "list"
+	suggestedList.classNa = "list"
+	suggestedList.id ="list"
 
-
-	list.forEach(function(entry) {
+	for (let i in list){
 		const suggestedItem = document.createElement("li")
-		 const fruitButton =document.createElement("button")
-		 fruitButton.innerHTML = entry
+		const fruitButton =document.createElement("button")
+		fruitButton.innerHTML = list[i]
+
+		fruitButton.addEventListener("click", fruitSelect)
 		suggestedItem.appendChild(fruitButton)
 		
 		suggestedList.appendChild(suggestedItem)
-	})
+	}
+
+
 
 	suggestions.appendChild(suggestedList)
 }
 
+function removeAutoCompeleteList() {
+	const suggestedItem = document.querySelector("#list")
+	if (suggestedItem) suggestedItem.remove()
+}
+
+function fruitSelect(e) {
+	e.preventDefault()
+
+	const buttonEL = e.target	
+	inputEl.value = buttonEL.innerHTML
+
+	removeAutoCompeleteList()
+}
