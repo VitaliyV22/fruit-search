@@ -28,8 +28,11 @@ function createList(list) {
 
 	list.forEach(function(entry) {
 		const suggestedItem = document.createElement("li")
+		 const fruitButton =document.createElement("button")
+		 fruitButton.innerHTML = entry
+		suggestedItem.appendChild(fruitButton)
+		
 		suggestedList.appendChild(suggestedItem)
-	
 	})
 
 	suggestions.appendChild(suggestedList)
