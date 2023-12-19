@@ -1,0 +1,42 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: monospace;
+  background: linear-gradient(
+    270deg,
+    rgb(250, 81, 24) 0%,
+    rgb(255, 215, 15) 100%
+  );
+}
+
+
+#fruit {
+   
+    background: rgba(204, 194, 194, 0.247);
+    border: solid rgba(204, 194, 194, 0.144);
+    width: 15rem ;
+    height: 2rem;
+    border-radius: 3px;
+
+}
+
+#list {
+    list-style: none;
+    padding: unset;
+    margin: unset;
+    max-block-size: 13rem;
+    overflow: hidden;
+
+}
+
+#list button {
+    border: unset;
+    background: unset;
+
+}
+
+ul li:hover {
+    background-color: rgba(230, 84, 35, 0.8);
+  }

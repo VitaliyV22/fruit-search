@@ -12,12 +12,16 @@ function search() {
 	if (value.length === 0) return
 
 	let results = fruits.filter((el) => el.toLowerCase().includes(value))
+	
+
 
 	createList(results)
 }
 
 
 function createList(list) {
+	const value = inputEl.value.toLowerCase()
+
 	const suggestedList = document.createElement("ul")
 	suggestedList.classNa = "list"
 	suggestedList.id ="list"
@@ -25,18 +29,31 @@ function createList(list) {
 	for (let i in list){
 		const suggestedItem = document.createElement("li")
 		const fruitButton =document.createElement("button")
-		fruitButton.innerHTML = list[i]
+		
+		const boldFruit = list[i].toLowerCase().replaceAll(value, `<b>${value}</b>` )
+		
+		const boldFruitCap = capitalizeBoldResult(boldFruit)
+		fruitButton.innerHTML = boldFruitCap
 
 		fruitButton.addEventListener("click", fruitSelect)
 		suggestedItem.appendChild(fruitButton)
 		
 		suggestedList.appendChild(suggestedItem)
+
 	}
 
 
 
 	suggestions.appendChild(suggestedList)
 }
+
+function capitalizeBoldResult(boldFruit) {
+	if (boldFruit[0] === '<') {
+	  return `<b>${boldFruit.charAt(3).toUpperCase()}${boldFruit.slice(4)}`;
+	} else {
+	  return `${boldFruit.charAt(0).toUpperCase()}${boldFruit.slice(1)}`;
+	}
+  }
 
 function removeAutoCompeleteList() {
 	const suggestedItem = document.querySelector("#list")
