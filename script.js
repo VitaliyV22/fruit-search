@@ -23,19 +23,24 @@ function createList(list) {
 	const value = inputEl.value.toLowerCase()
 
 	const suggestedList = document.createElement("ul")
-	suggestedList.classNa = "list"
+	suggestedList.className = "list"
 	suggestedList.id ="list"
 
 	for (let i in list){
 		const suggestedItem = document.createElement("li")
 		const fruitButton =document.createElement("button")
+	
+
 		
 		const boldFruit = list[i].toLowerCase().replaceAll(value, `<b>${value}</b>` )
 		
 		const boldFruitCap = capitalizeBoldResult(boldFruit)
 		fruitButton.innerHTML = boldFruitCap
+		
+		
 
 		fruitButton.addEventListener("click", fruitSelect)
+		
 		suggestedItem.appendChild(fruitButton)
 		
 		suggestedList.appendChild(suggestedItem)
@@ -61,10 +66,12 @@ function removeAutoCompeleteList() {
 }
 
 function fruitSelect(e) {
-	e.preventDefault()
+	
 
-	const buttonEL = e.target	
-	inputEl.value = buttonEL.innerHTML
+	const buttonEL = e.target
+	inputEl.value = buttonEL.innerHTML.replace(/(<([^>]+)>)/gi, "");
+	
+
 
 	removeAutoCompeleteList()
 }
